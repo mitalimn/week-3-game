@@ -9,46 +9,65 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <div class="row">
-		<div class="col-md-3">
+	<div class="col-md-3">
 		<img src="./assets/images/hangman1.png">
+	</div>
+	<div class="col-md-9">
+		<div id="header">
+			<p>Hangman</p>
 		</div>
-		<div class="col-md-9"><div id="header"><p>Hangman</p></div>
+	</div>
 </div>
 
-	<div class="row">
+<div class="row">
+	
+
+	<div class="col-md-8" id="main-container">
+		<div class="main">
+			<div id="hold">
+				
+			</div>
+			<p>Guess any letter to get started</p>	
+			<p>Guesses Remaining</p><br>
+				<p id="mylives"></p>
+				<p>Win - </p>
+				<p id=win></p>
+				<br>
+				<button id="playAgain"></button>
+				<audio id="music">
+	  				<source src="./assets/audio/default.mp3" type="audio">
+	  					Your browser does not support the audio element.
+				</audio>	
+		</div>
+	
 		<div class="col-md-4">
-		
-		<div class="col-md-8" id="main-container">
-		<div class="main"><p>
-		Guess any letter to get started</p>
-	<div class="imgDiv">
-			<img src="./assets/images/Guess.png" id="flag"></div>
+		<div class="imgDiv">
+			<img src="./assets/images/Guess.png" id="flag">
 		</div>
-			<div id="hold"></div><br>
-					<div id="wrongGuess">Your Wrong Guess so far :
-					<ul id="wrongGuessList"></ul>
-					</div>
-					<br>
-					<br><p>Guesses Remaining</p><br>
-					<p id="mylives"></p>
-					<p>Win - </p>
-					<p id=win></p>
-					<br>
-					<button id="playAgain" style="background-image: './assets/images/play.jpg';">Play again</button>
-					<audio id="music">
-  <source src="./assets/audio/default.mp3" type="audio">
-  Your browser does not support the audio element.
-</audio>
-     
 		</div>
-			
-	</div>
-			
+		<br>
+		<br>
+		<br>
+		<br>
+			<div id="wrongGuess">Wrong Guess :
+				<ul id="wrongGuessList"></ul>
+			</div>
+			<br>
+			<br>
+				
+	</div>		
+	
+		<div class="imgDiv">
+			<img src="./assets/images/globe1.gif" id="flag">
+		</div>
+	
+</div>			
 			
 	 <script src="./assets/javascript/game.js"></script>
-	</body>
+</body>
 </html>

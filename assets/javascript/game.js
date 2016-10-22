@@ -15,7 +15,7 @@ var numberOfWins = 0;
 var india = {
   name: "india",
   image:"india.png",
-  audio:"USA.mp3"
+  audio:"INDIA.mp3"
 }
 
 var usa = {
@@ -24,53 +24,33 @@ var usa = {
   audio:"USA.mp3"
 }
 
-var australia = {
-  name: "australia",
-  image:"imageURL3",
-  audio:"audio3"
+var canada = {
+  name: "canada",
+  image:"canada.jpg",
+  audio:"CANADA.mp3"
 }
 
 var france = {
   name: "france",
-  image:"imageURL4",
-  audio:"audio4"
+  image:"france.jpg",
+  audio:"FRANCE.mp3"
 }
 
 var germany = {
   name: "germany",
-  image:"imageURL5",
-  audio:"audio5"
+  image:"germany.png",
+  audio:"GERMANY.mp3"
 }
 
-var china = {
-  name: "china",
-  image:"imageURL6",
-  audio:"audio6"
+var russia = {
+  name: "russia",
+  image:"russia.png",
+  audio:"RUSSIA.mp3"
 }
 
-var unitedkingdom = {
-  name: "unitedkingdom",
-  image:"imageURL7",
-  audio:"audio7"
-}
 
-var japan = {
-  name: "japan",
-  image:"imageURL8",
-  audio:"audio8"
-}
-var japan = {
-  name: "japan",
-  image:"imageURL8",
-  audio:"audio8"
-}
-var japan = {
-  name: "japan",
-  image:"imageURL8",
-  audio:"audio8"
-}
 
-var GuessWords =[india,usa];
+var GuessWords =[india,usa,russia,germany,france,canada];
 
 //This function ca be used to test/display the list of countries names, while degugging
 displayGuessWords= function()
