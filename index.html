@@ -4,7 +4,7 @@
 	<title>Hangman Game</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-
+	<script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
@@ -21,13 +21,13 @@
 
 	<div class="row">
 		<div class="col-md-4">
-		<div class="imgDiv">
-			<img src="./assets/images/hangman1.png"></div>
-		</div>
+		
 		<div class="col-md-8" id="main-container">
 		<div class="main"><p>
 		Guess any letter to get started</p>
-	
+	<div class="imgDiv">
+			<img src="./assets/images/Guess.png" id="flag"></div>
+		</div>
 			<div id="hold"></div><br>
 					<div id="wrongGuess">Your Wrong Guess so far :
 					<ul id="wrongGuessList"></ul>
@@ -39,7 +39,10 @@
 					<p id=win></p>
 					<br>
 					<button id="playAgain" style="background-image: './assets/images/play.jpg';">Play again</button>
-
+					<audio id="music">
+  <source src="./assets/audio/default.mp3" type="audio">
+  Your browser does not support the audio element.
+</audio>
      
 		</div>
 			

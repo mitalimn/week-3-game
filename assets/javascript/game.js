@@ -1,77 +1,227 @@
+///////////////////////////////////////////////////////////////////////////////////
+// Created By : Mitali Naik                                                      // 
+// Assignment 3 - Boot Camp                                                      // 
+//                                                                               // 
+// Description: This is a version of Hangman game, with country names being used // 
+// for guessing.                                                                 //
+///////////////////////////////////////////////////////////////////////////////////
+
 window.onload = function () {
 
-  var wordList= ["mothersstt","fathersstt","daughtersstt","sonsstt","husbandsstt","wifeesstt"];
-  var word ;              // Selected word
-  var resultWord;
-  var guess ;             // Geuss
-  var geusses = [ ];      // Stored geusses
-  var lives ;             // Lives
-  var counter ;           // Count correct geusses
-  var space;              // Number of spaces in word '-'
-  var winCount=0;
-  // Get elements
-  var showLives = document.getElementById("mylives");
-  var showCatagory = document.getElementById("scatagory");
-  var winCtr=document.getElementById("win");
-  var wrong=document.getElementById("wrongGuessList");
- // var wrong=document.getElementById("wrongGuess");
-  //var getHint = document.getElementById("hint");
- // var showClue = document.getElementById("clue");
-//var userGuess
-    // When the user presses the key it records the keypress and then sets it to userguess
-  document.onkeyup = function(event) {
-  var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-  console.log("1"+userGuess);
- 
- // console.log("temp =" + temp);
- if(!alreadyGuessed(userGuess))
-    check(userGuess);
+//Game Win Counter
+var numberOfWins = 0;
+
+//The following country names are word list for this game
+var india = {
+  name: "india",
+  image:"india.png",
+  audio:"USA.mp3"
 }
 
-alreadyGuessed= function (userGuess) {
-  for(var index=0; index < geusses.length;index++)
-  {
-    if(userGuess === geusses[index]){
-      return true; 
-    }
-  }  
-  return false;
-  // body...
+var usa = {
+  name: "unitedstatesofamerica",
+  image:"usa.jpg",
+  audio:"USA.mp3"
 }
- // OnClick Function
-   check = function (userGuess) {
-      //list.onclick = function () {
-      //var z= document.getElementById('letter').value;
-      console.log(userGuess);
-      var i=0
-      var guesswords = document.getElementById('my-word');
-      guess = guesswords.childNodes;
+
+var australia = {
+  name: "australia",
+  image:"imageURL3",
+  audio:"audio3"
+}
+
+var france = {
+  name: "france",
+  image:"imageURL4",
+  audio:"audio4"
+}
+
+var germany = {
+  name: "germany",
+  image:"imageURL5",
+  audio:"audio5"
+}
+
+var china = {
+  name: "china",
+  image:"imageURL6",
+  audio:"audio6"
+}
+
+var unitedkingdom = {
+  name: "unitedkingdom",
+  image:"imageURL7",
+  audio:"audio7"
+}
+
+var japan = {
+  name: "japan",
+  image:"imageURL8",
+  audio:"audio8"
+}
+var japan = {
+  name: "japan",
+  image:"imageURL8",
+  audio:"audio8"
+}
+var japan = {
+  name: "japan",
+  image:"imageURL8",
+  audio:"audio8"
+}
+
+var GuessWords =[india,usa];
+
+//This function ca be used to test/display the list of countries names, while degugging
+displayGuessWords= function()
+{
+  for (var i = GuessWords.length - 1; i >= 0; i--) {
+    console.log ("name="+GuessWords[i].name);
+    console.log ("image="+GuessWords[i].imageURL);
+  }
+}
+
+//UI elements
+var showLives = document.getElementById("mylives");
+var guessWordHolder = document.getElementById('hold');
+var winCtr=document.getElementById("win");
+var wrong=document.getElementById("wrongGuessList");
+var flagImage=document.getElementById("flag");
+var music=document.getElementById("music");
+
+var Game = {
+
+  initialize:function()
+  {
+//clear screen
+    var seletedWordsHolder = document.getElementById('selected-word');
+    if (null != seletedWordsHolder)
+      while(seletedWordsHolder.firstChild)
+        seletedWordsHolder.removeChild(seletedWordsHolder.firstChild);
+    if (null != wrong)
+      while( wrong.firstChild )
+        wrong.removeChild(wrong.firstChild ); 
+    if (null != guessWordHolder)
+      while( guessWordHolder.firstChild )
+        guessWordHolder.removeChild(guessWordHolder.firstChild ); 
+
+//reset image and audio
+    this.setImage("Guess.jpg");
+    this.setAudio("default.mp3");
+
+//reset variables
+    console.log("initialize");
+    this.seletedWord = this.getRandomWord();
+    console.log("seletedWord:"+this.seletedWord.name);
+    this.intializeResultWord(this.seletedWord.name.length);
+    console.log("resultWord:"+this.resultWord);  
+    this.userGuesses = [ ];
+    this.lives = 13;
+    this.userGuess="";
+ 
+  },
+
+  setImage:function(imageName){
+    console.log("setImage:imageName");
+    flagImage.src ="./assets/images/"+ imageName;
+    
+  },
+
+  setAudio:function(audioName)
+  {
+    music.pause();
+    console.log("setAudio:audioName");
+    music.src = "./assets/audio/"+audioName;
+    music.play();
+  },
+
+  getRandomWord:function () {
+    var random = Math.floor((Math.random()*(GuessWords.length)));
+    randomWord=GuessWords[random];
+    return randomWord;
+  },
+
+  intializeResultWord:function (length) {
+    this.resultWord=[];
+    for(var i=0;i<length;i++)
+    {
+      this.resultWord.push("*"); 
+    }
+  },
+
+  alreadyGuessed: function () {
+    for(var index=0; index < this.userGuesses.length;index++)
+    {
+      if(this.userGuess === this.userGuesses[index]){
+        return true; 
+      }
+    }  
+    return false;    
+  },
+
+  // Create guesses ul
+   generateGuessPlaceholder:function () {
+    seletedWord= this.seletedWord.name;
+    console.log("generateGuessPlaceholder:seletedWord:"+ seletedWord);
+    var correctWordHolder = document.createElement('ul');
+    
+    for (var i = 0; i < seletedWord.length; i++) {
+      correctWordHolder.setAttribute('id', 'selected-word');
+      var guess = document.createElement('li');
+      guess.setAttribute('class', 'guess');
+      if (seletedWord[i] === "-") {
+        guess.innerHTML = "-";
+      } else {
+        guess.innerHTML = "_";
+      }
+      guessWordHolder.appendChild(correctWordHolder);
+      correctWordHolder.appendChild(guess);
+       }
+      guessWordHolder.appendChild(correctWordHolder);
+      correctWordHolder.appendChild(guess);    
+  },
+
+  // display result
+   displayResult: function () {
+    showLives.innerHTML = "You have " + this.lives + " lives";
+    if (this.lives < 1) {
+      showLives.innerHTML = "Game Over";
+    }  
+  },
+
+  play:function () {
+      
+      console.log(this.userGuess);
+      var i=0;
+      var seletedWordsHolder = document.getElementById('selected-word');
+      guessChild = seletedWordsHolder.childNodes;
       var matched = false;
 
-      for(;i<word.length;i++){
+      for(;i<this.seletedWord.name.length;i++){
         
-        if(word[i]===userGuess){
-          //geusses[i].innerHTML = geuss;
-          console.log("userGuess="+userGuess);
-          guess[i].innerHTML=userGuess;
-          // geusses[i]=userGuess;
+        if(this.seletedWord.name[i]===this.userGuess){          
+          
+          console.log("userGuess="+this.userGuess);
+          guessChild[i].innerHTML=this.userGuess;
+          
           matched=true;
-          resultWord[i]=userGuess;
-           counter += 1;
-           console.log("counter"+counter);
-           console.log("wordlength"+word.length)
+          this.resultWord[i]=this.userGuess;
+
+           console.log("wordlength"+this.seletedWord.name.length)
            //check for no of win 
-           console.log("word="+word);
-           console.log("resultWord="+resultWord);
+           console.log("word="+this.seletedWord.name);
+           console.log("resultWord="+this.resultWord);
 
-           var resultString= resultWord.join("");
+           var resultString= this.resultWord.join("");
            console.log("resultString="+resultString);
-          if(resultString===word){
-            winCount ++;
-            console.log("wincount:"+winCount);
-            win.innerHTML=winCount;
 
+          if(resultString===this.seletedWord.name){
+            numberOfWins ++;
+            console.log("numberOfWins:"+numberOfWins);
+            win.innerHTML=numberOfWins;
             showLives.innerHTML="You win";
+            this.setImage(this.seletedWord.image);
+            this.setAudio(this.seletedWord.audio);
             return;
           }           
                      
@@ -81,82 +231,41 @@ alreadyGuessed= function (userGuess) {
  
        if (!matched)
         {
-         lives -= 1;
-         geusses.push(userGuess);
-         printWrongGuess(userGuess);
-         comments();
+         this.lives -= 1;
+         this.userGuesses.push(this.userGuess);
+         this.printWrongGuess();
+         this.displayResult();
        }   
-    }
+    },
+
     //Print Wrong guesses
-    printWrongGuess=function(userGuess){
+    printWrongGuess:function(){
       var list=document.createElement("li");
-      list.appendChild(document.createTextNode(userGuess));
+      list.appendChild(document.createTextNode(this.userGuess));
       list.setAttribute("id","wrongWord");
-      wrong.appendChild(list);      
+      wrong.appendChild(list); 
+    } 
+};
 
-    }
- 
+playGame = function function_name(argument) {
+  var game = Object.create(Game);
+  game.initialize();
 
-  // Create geusses ul
-   result = function () {
-    wordHolder = document.getElementById('hold');
-    correct = document.createElement('ul');
-
-    for (var i = 0; i < word.length; i++) {
-      correct.setAttribute('id', 'my-word');
-      guess = document.createElement('li');
-      guess.setAttribute('class', 'guess');
-     if (word[i] === "-") {
-        guess.innerHTML = "-";
-      } else {
-        guess.innerHTML = "_";
-      }
-      wordHolder.appendChild(correct);
-      correct.appendChild(guess);
-       }
-      wordHolder.appendChild(correct);
-      correct.appendChild(guess);    
-  }
   
-  // Show lives
-   comments = function () {
-    showLives.innerHTML = "You have " + lives + " lives";
-    if (lives < 1) {
-      showLives.innerHTML = "Game Over";
-    }  
-  } 
- 
-  // Play
-  play = function () {
-   var random = Math.floor((Math.random()*(wordList.length)));
-    word=wordList[random];
-    resultWord=[];
-    for(var i=0;i<word.length;i++)
-    {
-      resultWord.push("*"); 
+  game.generateGuessPlaceholder();
+  document.onkeyup = function(event) {
+      game.userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+      console.log("1"+game.userGuess);
+      if(!game.alreadyGuessed()){
+        game.play();
+      }      
     }
-    console.log("word ="+word);
-    console.log("word length ="+word.length);
-    geusses = [ ];
-    lives = 13;
-    counter = 0;
-    space = 0;
- 
-    result();
-    comments();
-    console.log(counter);
- 
-   }
+  game.displayResult();
+} 
 
-play();
-
- //Reset for -Play again
-document.getElementById('playAgain').onclick = function() {
-  correct.parentNode.removeChild(correct);
-  while( wrong.firstChild ){
-    wrong.removeChild(wrong.firstChild );
+  document.getElementById('playAgain').onclick = function() {
+    playGame();   
   }
 
-  play();
-  } 
+playGame();
 } 
