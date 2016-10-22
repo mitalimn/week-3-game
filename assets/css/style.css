@@ -1,5 +1,5 @@
 body{
-	background-image: url("./assets/images/images.jpg");
+	background-image: url('../../assets/images/images.jpg');	
 }
 #header {
 	border:2px  dashed;
