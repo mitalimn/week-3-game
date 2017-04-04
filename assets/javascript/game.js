@@ -228,24 +228,24 @@ var Game = {
 };
 
 playGame = function function_name(argument) {
-  var game = Object.create(Game);
-  game.initialize();
-
+    var game = Object.create(Game);
+    game.initialize();
+    game.generateGuessPlaceholder();
+    
   
-  game.generateGuessPlaceholder();
-  document.onkeyup = function(event) {
-      game.userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-      console.log("1"+game.userGuess);
-      if(!game.alreadyGuessed()){
-        game.play();
-      }      
-    }
+      document.onkeyup = function(event) {
+         game.userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+         console.log("1"+game.userGuess);
+          if(!game.alreadyGuessed()){
+          game.play();
+          }      
+      }
   game.displayResult();
 } 
 
   document.getElementById('playAgain').onclick = function() {
     playGame();   
-  }
+}
 
 playGame();
-} 
+}

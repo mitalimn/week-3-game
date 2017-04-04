@@ -1,6 +1,15 @@
 body{
 	background-image: url('../../assets/images/background.gif');	
+
 }
+.container{
+	font-size: 20px;
+}
+
+.jumbotron{
+	font-family: 'Bungee Inline', cursive;
+}
+
 #header {
 	
 	color: white;
@@ -21,14 +30,12 @@ button{
 img{
 	float: left;
 }
-header p{
-	font-size: 20px;
-}
-.imgDiv{
+
+/*.imgDiv{
 	float: left;
 	margin-left: 0;
 	
-}
+}*/
 .main{
 	/*background: black;*/
 	/*width: 65%;*/
@@ -62,4 +69,5 @@ font-family: 'Audiowide', cursive;
 li{
 	display: inline-block;
 	color:orange;
+	padding: 4px;
 }

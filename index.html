@@ -13,59 +13,63 @@
 </head>
 <body>
 
-<div class="row">
-	<div class="col-md-3">
-		<img src="./assets/images/hangman1.png">
-	</div>
-	<div class="col-md-9">
-		<div id="header">
-			<p>Hangman</p>
-		</div>
-	</div>
-</div>
+<div class="container">
+
+	<div class="jumbotron">
+			<img src="./assets/images/hangman1.png" style="height: 200px; width: 200px">
+    <h1>HANGMAN GAME</h1> 
+		<p>Hangman game based on countries around the world</p>
+  </div>
 
 <div class="row">
-	
+	<div class="col-md-5">
+		<div class="panel panel-default">
+		<div class="panel-heading">Guess any letter to get started</div>
+		<div class="panel-body">
+				<div id="hold"></div>  <!--randomly created blanks-->
 
-	<div class="col-md-8" id="main-container">
-		<div class="main">
-			<div id="hold">
-				
-			</div>
-			<p>Guess any letter to get started</p>	
-			<p>Guesses Remaining</p><br>
-				<p id="mylives"></p>
-				<p>Win - </p>
-				<p id=win></p>
-				<br>
-				<button id="playAgain"></button>
-				<audio id="music">
-	  				<source src="./assets/audio/default.mp3" type="audio">
-	  					Your browser does not support the audio element.
-				</audio>	
-		</div>
-	
-		<div class="col-md-4">
-		<div class="imgDiv">
-			<img src="./assets/images/Guess.png" id="flag">
-		</div>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-			<div id="wrongGuess">Wrong Guess :
+				<div id="wrongGuess">Wrong Guess :
 				<ul id="wrongGuessList"></ul>
 			</div>
-			<br>
-			<br>
-				
-	</div>		
-	
-		<div class="imgDiv">
-			<img src="./assets/images/GLOBE1.gif" id="flag">
+
+			<audio id="music">
+	  				<source src="./assets/audio/default.mp3" type="audio">
+	  					Your browser does not support the audio element.
+				</audio>
 		</div>
-	
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="panel panel-default">
+		<div class="panel-heading">Guesses Remaining</div>
+		<div class="panel-body">
+
+			<p id="mylives"></p>
+				<p>Win - </p>
+				<p id=win></p>
+		</div>
+		</div>
+
+		
+	</div>
+
+		<div class="imgDiv">
+			<img src="./assets/images/GLOBE1.gif" style="height:150px; width: 150px">
+		</div>
+
+</div>
+
+<div class="row">	<button id="playAgain" style="margin: 20px 500px 20px 400px"></button></div>
+
+
+		<div class="row">
+			<div class="imgDiv text-center">
+					<img src="./assets/images/Guess.jpg" id="flag">
+				</div>
+
+				
+		</div>
+
 </div>			
 			
 	 <script src="./assets/javascript/game.js"></script>
